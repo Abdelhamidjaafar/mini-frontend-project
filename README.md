@@ -5,11 +5,16 @@ Installation and Setup
 To install and run the project locally, follow these steps:
 
 
-Install Dependencies
+1. Install Dependencies
    Install the required dependencies using npm:
 
 
-npm install 3. Run the Project
+npm install 
+
+
+2. add[ API-Key and API-URL and BOARD-Key] in api/hrflowApi.js file 
+
+3. Run the Project
 
 To start the project on your local machine, run:
 
