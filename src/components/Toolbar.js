@@ -66,18 +66,19 @@ const Toolbar = ({
                     <SortOptions sortOption={sortOption} setSortOption={setSortOption} />
                 </div>
             </Tippy>
-            <Tippy content={`Toggle Sort Direction (${sortDirection === 'asc' ? 'Ascending' : 'Descending'})`}>
+            <Tippy content={`Sort Direction (${sortDirection === 'asc' ? 'Ascending' : 'Descending'})`}>
                 <button
                     onClick={() => setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc')}
                     style={{ 
                         cursor: 'pointer', 
                         fontSize: '18px', 
                         marginLeft: '10px', 
+                        marginRight: '15px', 
                         backgroundColor: 'transparent', 
                         border: 'none' 
                     }}
                 >
-                    {sortDirection === 'asc' ? '↓ A-Z' : '↑ A-Z'}
+                    {sortDirection === 'asc' ? '↑  Ascending' : '↓ Descending'}
                 </button>
             </Tippy>
             <Tippy content="Reset Filters">

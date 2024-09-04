@@ -28,7 +28,7 @@ const JobBoard = () => {
             const dateA = a.created_at ? new Date(a.created_at) : new Date(0);
             const dateB = b.created_at ? new Date(b.created_at) : new Date(0);
 
-            let comparison = 0;
+            let comparison =0;
             switch (sortOption.toLowerCase()) {
                 case 'date':
                     comparison = dateB - dateA;
@@ -37,8 +37,8 @@ const JobBoard = () => {
                     comparison = (a.name || '').localeCompare(b.name || '');
                     break;
                 case 'category':
-                    comparison = (a.tags?.find(tag => tag.name === 'type')?.value || '')
-                        .localeCompare(b.tags?.find(tag => tag.name === 'type')?.value || '');
+                    comparison = (a.tags?.find(tag => tag.name === 'category')?.value || '')
+                        .localeCompare(b.tags?.find(tag => tag.name === 'category')?.value || '');
                     break;
                 case 'company':
                     comparison = (a.tags?.find(tag => tag.name === 'company')?.value || '')
