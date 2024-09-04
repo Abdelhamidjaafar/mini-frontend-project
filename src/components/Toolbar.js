@@ -3,7 +3,7 @@ import SearchBar from './SearchBar';
 import FilterDropdown from './FilterDropdown';
 import SortOptions from './SortOptions';
 import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css'; 
+import 'tippy.js/dist/tippy.css';
 
 const Toolbar = ({
     searchTerm,
@@ -16,7 +16,7 @@ const Toolbar = ({
     resetFilters
 }) => {
 
-    
+
     useEffect(() => {
         const savedSearchTerm = localStorage.getItem('searchTerm');
         const savedCategory = localStorage.getItem('selectedCategory');
@@ -42,7 +42,10 @@ const Toolbar = ({
 
     return (
         <div className="toolbar">
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <SearchBar
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+            />
             <Tippy content={selectedCategory === "" ? "All Categories" : selectedCategory}>
                 <div>
                     <FilterDropdown
@@ -58,19 +61,19 @@ const Toolbar = ({
                 </div>
             </Tippy>
             <Tippy content="Reset Filters">
-            <div>
-            <button
-                onClick={() => {
-                    resetFilters();
-                    localStorage.removeItem('searchTerm');
-                    localStorage.removeItem('selectedCategory');
-                    localStorage.removeItem('sortOption');
-                }}
-            >
-                Reset Filters
-            </button></div>
+                <div>
+                    <button
+                        onClick={() => {
+                            resetFilters();
+                            localStorage.removeItem('searchTerm');
+                            localStorage.removeItem('selectedCategory');
+                            localStorage.removeItem('sortOption');
+                        }}
+                    >
+                        Reset Filters
+                    </button></div>
             </Tippy>
-          
+
         </div>
     );
 };
