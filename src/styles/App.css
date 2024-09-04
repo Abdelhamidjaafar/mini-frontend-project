@@ -35,7 +35,7 @@ input[type="text"] {
     border-radius: 4px;
     border: 1px solid #ddd;
     font-size: 1rem;
-    width: 30%; /* Make input smaller */
+     width: 30%;
     margin-right: 0.5rem;
     margin-bottom: 10px;
 }
@@ -142,26 +142,25 @@ button:hover {
 
 .pagination button {
     margin: 0 0.5rem;
-    background-color: rgb(52, 203, 230); /* Bright cyan for button background */
+    background-color: rgb(52, 203, 230); 
     color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 0.5rem 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    height: 2.5rem; /* Match height with select */
+    height: 2.5rem; 
 }
 
 .pagination button:hover {
-    background-color: #0288d1; /* Darker cyan for hover effect */
+    background-color: #0288d1; 
 }
 
 .pagination span {
     font-size: 1.1rem;
-    color: #ffffff; /* Dark grey text color */
+    color: #ffffff; 
 }
 
 .jobsPerPage{
     margin-top: 0.5rem;
-    /* margin-bottom: 2rem; */
 }
