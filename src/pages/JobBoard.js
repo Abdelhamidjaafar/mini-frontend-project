@@ -12,6 +12,7 @@ const JobBoard = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('');
     const [sortOption, setSortOption] = useState('date');
+    const [sortDirection, setSortDirection] = useState('asc'); 
     const [currentPage, setCurrentPage] = useState(1);
     const [jobsPerPage, setJobsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState(1);
@@ -20,31 +21,40 @@ const JobBoard = () => {
         dispatch(getJobs());
     }, [dispatch]);
 
-    
-    const filteredJobs = jobs.length === 0 ? [] : jobs?.jobs.filter(job => job?.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filteredJobs = jobs.length === 0 ? [] : jobs?.jobs
+        .filter(job => job?.name?.toLowerCase().includes(searchTerm.toLowerCase()))
         .filter(job => (selectedCategory === '' || job?.tags?.some(tag => tag.name === 'category' && tag.value.toLowerCase() === selectedCategory.toLowerCase())))
         .sort((a, b) => {
             const dateA = a.created_at ? new Date(a.created_at) : new Date(0);
             const dateB = b.created_at ? new Date(b.created_at) : new Date(0);
+
+            let comparison = 0;
             switch (sortOption.toLowerCase()) {
                 case 'date':
-                    return dateB - dateA;
+                    comparison = dateB - dateA;
+                    break;
                 case 'name':
-                    return (a.name || '').localeCompare(b.name || '');
+                    comparison = (a.name || '').localeCompare(b.name || '');
+                    break;
                 case 'category':
-                    return (a.tags?.find(tag => tag.name === 'type')?.value || '').localeCompare(b.tags?.find(tag => tag.name === 'type')?.value || '');
+                    comparison = (a.tags?.find(tag => tag.name === 'type')?.value || '')
+                        .localeCompare(b.tags?.find(tag => tag.name === 'type')?.value || '');
+                    break;
                 case 'company':
-                    return (a.tags?.find(tag => tag.name === 'company')?.value || '')
+                    comparison = (a.tags?.find(tag => tag.name === 'company')?.value || '')
                         .localeCompare(b.tags?.find(tag => tag.name === 'company')?.value || '');
+                    break;
                 default:
-                    return 0;
+                    comparison = 0;
             }
-        });
 
+            return sortDirection === 'asc' ? comparison : -comparison; 
+        });
 
     useEffect(() => {
         const calculatedTotalPages = Math.ceil(filteredJobs.length / jobsPerPage);
         setTotalPages(calculatedTotalPages);
+
         if (currentPage > calculatedTotalPages) {
             setCurrentPage(1);
         }
@@ -56,6 +66,7 @@ const JobBoard = () => {
         setSearchTerm('');
         setSelectedCategory('');
         setSortOption('date');
+        setSortDirection('asc');
         setCurrentPage(1);
     };
 
@@ -72,6 +83,8 @@ const JobBoard = () => {
                 setSelectedCategory={setSelectedCategory}
                 sortOption={sortOption}
                 setSortOption={setSortOption}
+                sortDirection={sortDirection} 
+                setSortDirection={setSortDirection} 
                 resetFilters={resetFilters}
             />
             <JobList jobs={displayedJobs} />

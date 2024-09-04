@@ -13,20 +13,22 @@ const Toolbar = ({
     setSelectedCategory,
     sortOption,
     setSortOption,
+    sortDirection,
+    setSortDirection,
     resetFilters
 }) => {
-
 
     useEffect(() => {
         const savedSearchTerm = localStorage.getItem('searchTerm');
         const savedCategory = localStorage.getItem('selectedCategory');
         const savedSortOption = localStorage.getItem('sortOption');
+        const savedSortDirection = localStorage.getItem('sortDirection');
 
         if (savedSearchTerm) setSearchTerm(savedSearchTerm);
         if (savedCategory) setSelectedCategory(savedCategory);
         if (savedSortOption) setSortOption(savedSortOption);
-    }, [setSearchTerm, setSelectedCategory, setSortOption]);
-
+        if (savedSortDirection) setSortDirection(savedSortDirection === 'asc');
+    }, [setSearchTerm, setSelectedCategory, setSortOption, setSortDirection]);
 
     useEffect(() => {
         localStorage.setItem('searchTerm', searchTerm);
@@ -39,6 +41,10 @@ const Toolbar = ({
     useEffect(() => {
         localStorage.setItem('sortOption', sortOption);
     }, [sortOption]);
+
+    useEffect(() => {
+        localStorage.setItem('sortDirection', sortDirection ? 'asc' : 'desc');
+    }, [sortDirection]);
 
     return (
         <div className="toolbar">
@@ -60,6 +66,20 @@ const Toolbar = ({
                     <SortOptions sortOption={sortOption} setSortOption={setSortOption} />
                 </div>
             </Tippy>
+            <Tippy content={`Toggle Sort Direction (${sortDirection === 'asc' ? 'Ascending' : 'Descending'})`}>
+                <button
+                    onClick={() => setSortDirection(prev => prev === 'asc' ? 'desc' : 'asc')}
+                    style={{ 
+                        cursor: 'pointer', 
+                        fontSize: '18px', 
+                        marginLeft: '10px', 
+                        backgroundColor: 'transparent', 
+                        border: 'none' 
+                    }}
+                >
+                    {sortDirection === 'asc' ? '↓ A-Z' : '↑ A-Z'}
+                </button>
+            </Tippy>
             <Tippy content="Reset Filters">
                 <div>
                     <button
@@ -68,12 +88,13 @@ const Toolbar = ({
                             localStorage.removeItem('searchTerm');
                             localStorage.removeItem('selectedCategory');
                             localStorage.removeItem('sortOption');
+                            localStorage.removeItem('sortDirection');
                         }}
                     >
                         Reset Filters
-                    </button></div>
+                    </button>
+                </div>
             </Tippy>
-
         </div>
     );
 };
