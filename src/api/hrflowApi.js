@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const API_KEY = 'askr_dbfb6f33e7d3c6b6e334b2d420f81465';
-const BASE_URL = 'https://api.hrflow.ai/v1/jobs/searching';
-const board_keys = ['887595b735d68f0bc0b0b0535f7d8f7d158a3f4e']
+const API_KEY = 'API_KEY her';
+const BASE_URL = 'endpoint URL here ';
+const board_keys = ['put board-key here ']
 export const fetchJobs = async () => {
     try {
         const response = await axios.get(BASE_URL, {
