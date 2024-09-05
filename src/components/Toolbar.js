@@ -39,7 +39,6 @@ const Toolbar = ({
     }, [selectedCategory]);
 
     useEffect(() => {
-        console.log("sorting by",sortOption)
         localStorage.setItem('sortOption', sortOption);
     }, [sortOption]);
 

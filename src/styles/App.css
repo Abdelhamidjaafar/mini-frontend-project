@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #3eb599; 
+    background-color:rgb(23, 117, 133); 
     color: #333; 
 }
 
@@ -90,6 +90,8 @@ button:hover {
     cursor: pointer;
     transition: box-shadow 0.3s ease;
     color: #fff;
+    /* width: 60%; */
+    justify-content: center;
 }
 
 .job-card:hover {
