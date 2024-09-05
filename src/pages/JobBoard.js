@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobs } from '../state/jobSlice';
@@ -8,11 +9,10 @@ import Pagination from '../components/Pagination';
 const JobBoard = () => {
     const dispatch = useDispatch();
     const { jobs, loading, error } = useSelector((state) => state.jobs);
-
-    const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [sortOption, setSortOption] = useState('date');
-    const [sortDirection, setSortDirection] = useState('asc'); 
+    const [searchTerm, setSearchTerm] = useState(() => localStorage.getItem('searchTerm') || '');
+    const [selectedCategory, setSelectedCategory] = useState(() => localStorage.getItem('selectedCategory') || '');
+    const [sortOption, setSortOption] = useState(() => localStorage.getItem('sortOption') || 'date');
+    const [sortDirection, setSortDirection] = useState(() => localStorage.getItem('sortDirection') === 'asc' ? 'asc' : 'desc');
     const [currentPage, setCurrentPage] = useState(1);
     const [jobsPerPage, setJobsPerPage] = useState(10);
     const [totalPages, setTotalPages] = useState(1);

@@ -28,7 +28,7 @@ const Toolbar = ({
         if (savedCategory) setSelectedCategory(savedCategory);
         if (savedSortOption) setSortOption(savedSortOption);
         if (savedSortDirection) setSortDirection(savedSortDirection === 'asc');
-    }, [setSearchTerm, setSelectedCategory, setSortOption, setSortDirection]);
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('searchTerm', searchTerm);
@@ -39,6 +39,7 @@ const Toolbar = ({
     }, [selectedCategory]);
 
     useEffect(() => {
+        console.log("sorting by",sortOption)
         localStorage.setItem('sortOption', sortOption);
     }, [sortOption]);
 
